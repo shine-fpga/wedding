@@ -966,13 +966,24 @@ var LYRICS = [{t:10.76,s:"结伴创将来多么的美"},{t:15.23,s:"你的路我
       startPlay();
     }
   });
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden && playing) {
-      audio.pause();
-    } else if (!document.hidden && playing === false && opened && audio.currentTime > 0) {
+  /* 切到后台自动暂停，回到前台继续播（原来这里有个 bug：暂停时没记状态，回来就不放了） */
+  var autoPaused = false;
+  function resumeIfNeeded() {
+    if (autoPaused && !userPaused) {
+      autoPaused = false;
       audio.play().catch(function () {});
     }
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      if (!audio.paused && !userPaused) { autoPaused = true; audio.pause(); }
+    } else {
+      resumeIfNeeded();
+    }
   });
+  // iOS / 微信 从后台返回时补一刀
+  window.addEventListener('pageshow', function () { setTimeout(resumeIfNeeded, 120); });
+  window.addEventListener('focus', function () { setTimeout(resumeIfNeeded, 120); });
 
   /* ---------- 3. 滚动入场 ---------- */
   var revealEls = [].slice.call(document.querySelectorAll('.rv'));
