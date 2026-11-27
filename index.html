@@ -1158,7 +1158,7 @@ var LYRICS = [{t:10.76,s:"结伴创将来多么的美"},{t:15.23,s:"你的路我
     });
   }
   /* ---------- 8. 悬浮歌词同步 ---------- */
-  var LYRIC_OFFSET = 0;   // 正数=歌词提前，负数=歌词延后（秒）
+  var LYRIC_OFFSET = 0.15;   // 正数=歌词提前；实测原时间轴比实际起唱晚约 0.14s
   var lyricFloat = document.getElementById('lyricFloat');
   var lyricText = document.getElementById('lyricText');
   var lastLyricIdx = -2;
@@ -1191,8 +1191,13 @@ var LYRICS = [{t:10.76,s:"结伴创将来多么的美"},{t:15.23,s:"你的路我
     }
   }
 
-  audio.addEventListener('timeupdate', function () { syncLyric(audio.currentTime); });
+  // 逐帧同步：timeupdate 一秒只触发 4 次，会明显滞后
+  (function lyricRafLoop() {
+    if (audio && !audio.paused) syncLyric(audio.currentTime);
+    requestAnimationFrame(lyricRafLoop);
+  })();
   audio.addEventListener('seeking', function () { lastLyricIdx = -2; syncLyric(audio.currentTime); });
+  audio.addEventListener('play', function () { lastLyricIdx = -2; syncLyric(audio.currentTime); });
   audio.addEventListener('pause', function () { if (lyricFloat) lyricFloat.classList.remove('show'); });
 })();
 </script>
