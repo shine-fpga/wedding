@@ -1141,12 +1141,16 @@ var LYRICS = [{t:10.76,s:"结伴创将来多么的美"},{t:15.23,s:"你的路我
     }
     if (idx === lastLyricIdx) return;
     lastLyricIdx = idx;
-    if (idx >= 0) showFloatLine(LYRICS[idx].s);
+    if (idx >= 0) {
+      if (lyricFloat) lyricFloat.classList.add('show');
+      showFloatLine(LYRICS[idx].s);
+    } else if (lyricFloat) {
+      lyricFloat.classList.remove('show');   // 前奏/间奏没词就先收起来
+    }
   }
 
   audio.addEventListener('timeupdate', function () { syncLyric(audio.currentTime); });
   audio.addEventListener('seeking', function () { lastLyricIdx = -2; syncLyric(audio.currentTime); });
-  audio.addEventListener('play', function () { if (lyricFloat) lyricFloat.classList.add('show'); });
   audio.addEventListener('pause', function () { if (lyricFloat) lyricFloat.classList.remove('show'); });
 })();
 </script>
