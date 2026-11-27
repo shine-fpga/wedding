@@ -341,6 +341,18 @@ body.opened main{opacity:1;}
 }
 .spread:first-of-type{margin-top:0;}
 
+/* 复制提示 */
+.toast{
+  position:fixed;left:50%;bottom:calc(150px + env(safe-area-inset-bottom));
+  transform:translate(-50%,10px);z-index:80;
+  padding:10px 20px;border-radius:999px;font-size:13px;letter-spacing:.05em;
+  background:rgba(26,5,8,.88);color:#F8EDCE;
+  border:1px solid rgba(235,215,155,.3);
+  opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;
+  white-space:nowrap;max-width:88vw;
+}
+.toast.on{opacity:1;transform:translate(-50%,0);}
+
 /* 悬浮歌词 */
 .lyric-float{
   position:fixed;left:0;right:0;z-index:66;
@@ -625,6 +637,7 @@ body.opened #prog{opacity:.75;}
 
 <!-- 悬浮歌词 -->
 <div class="lyric-float" id="lyricFloat"><span id="lyricText"></span></div>
+<div class="toast" id="toast"></div>
 
 <!-- ================= 正文 ================= -->
 <main>
@@ -642,7 +655,7 @@ body.opened #prog{opacity:.75;}
         <p class="dim">农历丙午年 · 腊月廿四 · 星期日</p>
         <p>为 陈磊 先生 与 曾淼 女士</p>
         <p>举行婚宴</p>
-        <p style="font-size:.86em;letter-spacing:.1em">重庆市开州区长沙镇　红月亮酒店</p>
+        <p style="font-size:.86em;letter-spacing:.1em">重庆市开州区长沙镇　红月亮大酒店</p>
         <p class="qi">敬备喜筵　恭候光临</p>
       </div>
 
@@ -762,11 +775,11 @@ body.opened #prog{opacity:.75;}
         </div>
         <div class="info-row">
           <span class="k">时 间</span>
-          <span class="v" id="timeText">午宴　12:00 开席<small>11:30 起迎宾</small></span>
+          <span class="v" id="timeText">午宴　12:00 开席</span>
         </div>
         <div class="info-row">
           <span class="k">地 点</span>
-          <span class="v" id="venueText">重庆市开州区长沙镇 红月亮酒店<small>点下方「导航前往」可直接地图导航</small></span>
+          <span class="v" id="venueText">重庆市开州区长沙镇 红月亮大酒店<small>可点下方「复制地址」粘到高德/腾讯地图里搜</small></span>
         </div>
         <div class="info-row">
           <span class="k">邀 请</span>
@@ -776,9 +789,13 @@ body.opened #prog{opacity:.75;}
       <!-- ======== ↑↑↑ 待补充信息 ↑↑↑ ======== -->
 
       <div class="btns rv">
-        <a class="btn" id="mapBtn" href="#" hidden>
+        <button class="btn" id="copyAddr" type="button">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+          复制地址
+        </button>
+        <a class="btn" id="mapBtn" href="https://uri.amap.com/search?keyword=%E9%87%8D%E5%BA%86%E5%B8%82%E5%BC%80%E5%B7%9E%E5%8C%BA%E9%95%BF%E6%B2%99%E9%95%87%E7%BA%A2%E6%9C%88%E4%BA%AE%E5%A4%A7%E9%85%92%E5%BA%97&src=wedding01&callnative=1" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
-          导航前往
+          高德导航
         </a>
         <a class="btn" id="telBtn" href="#" hidden>
           <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 4 5.1 1 1 0 0 1 5 4z"/></svg>
@@ -848,10 +865,12 @@ var CONFIG = {
   ],
 
   // 地图：填了地址后「导航前往」按钮自动出现。默认调用高德地图搜索
-  mapKeyword: '重庆市开州区长沙镇红月亮酒店',
+  mapKeyword: '重庆市开州区长沙镇红月亮大酒店',
+  mapUrl: 'https://uri.amap.com/search?keyword=%E9%87%8D%E5%BA%86%E5%B8%82%E5%BC%80%E5%B7%9E%E5%8C%BA%E9%95%BF%E6%B2%99%E9%95%87%E7%BA%A2%E6%9C%88%E4%BA%AE%E5%A4%A7%E9%85%92%E5%BA%97&src=wedding01&callnative=1',
 
   // 联系电话：填了就显示「联系新人」按钮（多个用逗号隔开）
-  phones: ['17723623403']   // 电话（喜宴页「联系新人」按钮）
+  phones: ['17723623403'],  // 电话（喜宴页「联系新人」按钮）
+  addressText: '重庆市开州区长沙镇红月亮大酒店'
 };
 /* ========================================================== */
 
@@ -1036,10 +1055,33 @@ var LYRICS = [{t:10.76,s:"结伴创将来多么的美"},{t:15.23,s:"你的路我
 
   /* ---------- 6. 地图 / 电话 ---------- */
   var mapBtn = document.getElementById('mapBtn');
-  if (CONFIG.mapKeyword) {
-    mapBtn.href = 'https://uri.amap.com/search?keyword=' + encodeURIComponent(CONFIG.mapKeyword);
-    mapBtn.hidden = false;
+  if (CONFIG.mapUrl) mapBtn.href = CONFIG.mapUrl;
+
+  var copyBtn = document.getElementById('copyAddr');
+  var toast = document.getElementById('toast');
+  function showToast(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('on');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function () { toast.classList.remove('on'); }, 2200);
   }
+  function copyText(txt) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function () {
+        showToast('地址已复制，粘贴到地图里就能导航');
+      }).catch(function () { fallbackCopy(txt); });
+    } else { fallbackCopy(txt); }
+  }
+  function fallbackCopy(txt) {
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('地址已复制，粘贴到地图里就能导航'); }
+    catch (e) { showToast('复制失败，请手选地址'); }
+    document.body.removeChild(ta);
+  }
+  if (copyBtn) copyBtn.addEventListener('click', function () { copyText(CONFIG.addressText || '重庆市开州区长沙镇红月亮大酒店'); });
   var telBtn = document.getElementById('telBtn');
   if (CONFIG.phones && CONFIG.phones.length) {
     telBtn.href = 'tel:' + CONFIG.phones[0];
