@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#7A0E14">
+<title>陈磊 &amp; 曾淼 · 婚礼邀请函</title>
+<meta name="description" content="2027年1月31日（农历腊月廿四），陈磊与曾淼敬备喜筵，恭候光临。你的路，我的途，从此再也不分己与彼。">
+<meta property="og:title" content="陈磊 &amp; 曾淼 · 婚礼邀请函">
+<meta property="og:description" content="2027.01.31 · 你的路，我的途，从此再也不分己与彼">
+<meta property="og:image" content="assets/img/cover.jpg">
+<style>
+/* ============================================================
+   基础变量：想改配色只需改这几行
+   ============================================================ */
+:root{
+  --red:#8C1A21;        /* 正红 */
+  --red-deep:#5A0C11;   /* 深红 */
+  --red-ink:#33060A;    /* 近黑红 */
+  --gold:#C8A24A;       /* 金色 */
+  --gold-l:#EBD79B;     /* 浅金 */
+  --gold-d:#9C7628;     /* 暗金 */
+  --paper:#F7F0E2;      /* 宣纸 */
+  --paper-2:#F0E5CE;
+  --ink:#2A1D18;
+  --ink-2:#6B5847;
+  --serif:"Kai","STKaiti","Kaiti SC","KaiTi","Songti SC","SimSun",serif;
+  --disp:"XingKai","STXingkai","STXingkai SC","KaiTi",serif;
+  --num:Georgia,"Times New Roman",serif;
+}
+
+@font-face{
+  font-family:'XingKai';
+  src:url('https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/fonts/xingkai.woff2') format('woff2');
+  font-display:swap;
+}
+@font-face{
+  font-family:'Kai';
+  src:url('https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/fonts/kaiti.woff2') format('woff2');
+  font-display:swap;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--red-ink);
+  color:var(--ink);
+  font-family:var(--serif);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+body.locked{overflow:hidden;height:100vh;}
+img{display:block;max-width:100%;}
+p{margin:0;}
+h1,h2,h3{margin:0;font-weight:400;}
+
+/* ============================================================
+   封面
+   ============================================================ */
+#cover{
+  position:fixed;inset:0;z-index:90;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--red-deep);
+  transition:transform 1.15s cubic-bezier(.76,0,.24,1),opacity .9s ease;
+  will-change:transform;
+}
+#cover::before{ /* 虚化的婚纱照底 */
+  content:"";position:absolute;inset:-8%;
+  background:url('https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/cover.jpg') center 26%/cover no-repeat;
+  filter:blur(11px) saturate(1.05) brightness(.92);
+  opacity:.52;
+}
+#cover::after{ /* 红色渐层 + 暗角 */
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 50% 44%,rgba(60,10,14,.12) 0%,rgba(34,5,8,.55) 55%,rgba(14,2,4,.9) 100%),
+    linear-gradient(180deg,rgba(48,8,12,.5) 0%,rgba(146,28,36,.16) 46%,rgba(18,3,5,.86) 100%);
+}
+body.opened #cover{transform:translateY(-101%);opacity:.15;}
+
+.cover-frame{
+  position:absolute;inset:14px;
+  border:1px solid rgba(200,162,74,.34);
+  pointer-events:none;
+}
+.cover-frame::before{
+  content:"";position:absolute;inset:7px;
+  border:1px solid rgba(200,162,74,.16);
+}
+.corner{position:absolute;width:26px;height:26px;border:1px solid rgba(235,215,155,.75);}
+.corner.tl{top:-1px;left:-1px;border-right:0;border-bottom:0;}
+.corner.tr{top:-1px;right:-1px;border-left:0;border-bottom:0;}
+.corner.bl{bottom:-1px;left:-1px;border-right:0;border-top:0;}
+.corner.br{bottom:-1px;right:-1px;border-left:0;border-top:0;}
+
+.cover-inner{
+  position:relative;z-index:2;text-align:center;
+  padding:0 30px;width:100%;max-width:520px;
+  animation:coverIn 1.8s cubic-bezier(.2,.8,.2,1) both .2s;
+}
+@keyframes coverIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+
+.cover-eyebrow{
+  font-family:var(--num);font-size:10px;letter-spacing:.52em;
+  color:rgba(235,215,155,.78);text-indent:.52em;
+  margin-bottom:26px;
+}
+.seal{
+  width:74px;height:74px;margin:0 auto 26px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(235,215,155,.9);
+  transform:rotate(-3deg);
+  position:relative;
+  animation:breathe 5.5s ease-in-out infinite;
+}
+.seal::before{content:"";position:absolute;inset:4px;border:.5px solid rgba(235,215,155,.45);}
+.seal span{
+  font-family:'Kai','STKaiti','Kaiti SC','KaiTi',serif;font-size:44px;line-height:1;
+  color:#F6E9C4;text-shadow:0 0 18px rgba(235,215,155,.45);
+}
+@keyframes breathe{0%,100%{transform:rotate(-3deg) scale(1);}50%{transform:rotate(-3deg) scale(1.05);}}
+
+.cover-names{
+  font-family:var(--disp);
+  font-size:clamp(34px,10.5vw,50px);
+  letter-spacing:.12em;
+  color:#FBF2D8;
+  text-shadow:0 2px 24px rgba(0,0,0,.45),0 0 30px rgba(235,215,155,.18);
+  line-height:1.35;
+}
+.cover-names i{
+  font-style:normal;font-family:var(--num);font-size:.52em;
+  color:var(--gold-l);opacity:.85;margin:0 .12em;vertical-align:.06em;
+}
+.cover-rule{
+  width:150px;height:1px;margin:24px auto;
+  background:linear-gradient(90deg,transparent,rgba(235,215,155,.75),transparent);
+  position:relative;
+}
+.cover-rule::after{
+  content:"❖";position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+  font-size:9px;color:rgba(235,215,155,.8);background:transparent;
+}
+.cover-date{
+  font-family:var(--num);font-size:23px;letter-spacing:.24em;
+  color:#F6E9C4;text-indent:.24em;
+}
+.cover-lunar{
+  margin-top:14px;font-size:12.5px;letter-spacing:.18em;
+  color:rgba(246,233,196,.66);
+}
+
+.cover-open{
+  position:absolute;left:0;right:0;bottom:calc(38px + env(safe-area-inset-bottom));
+  text-align:center;z-index:3;
+  animation:hintUp 3.4s ease-in-out infinite;
+}
+.cover-open .ring{
+  width:56px;height:56px;margin:0 auto 12px;border-radius:50%;
+  border:1px solid rgba(235,215,155,.5);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.cover-open .ring::after{
+  content:"";position:absolute;inset:-1px;border-radius:50%;
+  border:1px solid rgba(235,215,155,.35);
+  animation:pulse 2.8s ease-out infinite;
+}
+@keyframes pulse{0%{transform:scale(1);opacity:.8;}100%{transform:scale(1.65);opacity:0;}}
+.cover-open .ring svg{width:15px;height:15px;stroke:rgba(235,215,155,.95);fill:none;stroke-width:1.4;}
+.cover-open em{
+  font-style:normal;font-size:12px;letter-spacing:.4em;
+  color:rgba(246,233,196,.8);text-indent:.4em;
+}
+@keyframes hintUp{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+
+/* ============================================================
+   通用区块
+   ============================================================ */
+main{opacity:0;transition:opacity 1s ease .45s;}
+body.opened main{opacity:1;}
+
+.sec{
+  position:relative;overflow:hidden;
+  padding:clamp(64px,12vh,110px) 24px;
+}
+.sec.paper{
+  background:
+    radial-gradient(circle at 18% 6%,rgba(255,255,255,.85),transparent 52%),
+    radial-gradient(circle at 88% 96%,rgba(255,255,255,.55),transparent 46%),
+    linear-gradient(180deg,var(--paper),var(--paper-2));
+  color:var(--ink);
+}
+.sec.paper::before{ /* 宣纸纹 */
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(120,90,50,.035) 0 1px,transparent 1px 4px),
+    repeating-linear-gradient(90deg,rgba(120,90,50,.025) 0 1px,transparent 1px 5px);
+}
+.sec.dark{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(160,40,48,.55),transparent 62%),
+    linear-gradient(180deg,var(--red-deep),var(--red-ink));
+  color:#F3E7C9;
+}
+.sec.dark::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.085;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='62' viewBox='0 0 190 62'%3E%3Cpath d='M0 46 Q23 16 46 46 T92 46 T138 46 T184 46' fill='none' stroke='%23EBD79B' stroke-width='.7'/%3E%3C/svg%3E");
+  background-size:190px 62px;
+}
+.sec .wrap{position:relative;z-index:2;max-width:560px;margin:0 auto;}
+
+.eyebrow{
+  font-family:var(--num);font-size:9.5px;letter-spacing:.46em;
+  text-indent:.46em;text-align:center;opacity:.62;
+}
+.title{
+  font-family:var(--disp);
+  font-size:clamp(26px,7.4vw,34px);
+  text-align:center;letter-spacing:.34em;text-indent:.34em;
+  margin:14px 0 6px;
+}
+.sec.dark .title{color:#F8EDCE;text-shadow:0 0 26px rgba(235,215,155,.25);}
+.sec.paper .title{color:var(--red);}
+
+.rule{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:22px auto 0;width:180px;
+}
+.rule span{height:1px;flex:1;background:currentColor;opacity:.35;}
+.rule i{font-style:normal;font-size:8px;opacity:.6;}
+.sec.paper .rule{color:var(--gold-d);}
+.sec.dark .rule{color:var(--gold-l);}
+
+/* 入场动画 */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .95s cubic-bezier(.22,.8,.2,1),transform .95s cubic-bezier(.22,.8,.2,1);}
+.rv.in{opacity:1;transform:none;}
+
+/* ============================================================
+   一、邀请函正文
+   ============================================================ */
+.invite{
+  text-align:center;margin-top:34px;
+  font-size:clamp(15px,4.3vw,17px);
+  line-height:2.5;letter-spacing:.13em;color:var(--ink);
+}
+.invite .big{
+  font-family:var(--disp);font-size:clamp(23px,6.6vw,29px);
+  color:var(--red);letter-spacing:.1em;line-height:1.9;
+  margin:6px 0;
+}
+.invite .dim{color:var(--ink-2);font-size:.92em;letter-spacing:.16em;}
+.invite .qi{
+  font-family:var(--disp);font-size:clamp(19px,5.4vw,23px);
+  color:var(--red-deep);letter-spacing:.2em;margin-top:22px;
+}
+.sign{
+  text-align:right;
+  font-size:14px;letter-spacing:.2em;color:var(--ink-2);line-height:2.1;
+}
+.sign b{
+  display:block;font-family:var(--disp);font-size:clamp(21px,5.8vw,26px);
+  color:var(--red);letter-spacing:.16em;font-weight:400;
+}
+.sign .zh{font-size:12px;opacity:.7;letter-spacing:.3em;}
+.signwrap{
+  display:flex;justify-content:flex-end;align-items:flex-end;gap:16px;
+  margin-top:38px;padding-right:6px;
+}
+
+/* 印章 */
+.stamp{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:54px;height:54px;flex:0 0 54px;border:1.5px solid rgba(140,26,33,.85);
+  color:var(--red);font-family:'Kai','STKaiti','Kaiti SC','KaiTi',serif;font-size:31px;line-height:1;
+  transform:rotate(-6deg);opacity:.92;border-radius:2px;
+}
+
+/* ============================================================
+   二、新人
+   ============================================================ */
+.pair{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:12px;
+  align-items:center;margin-top:38px;
+}
+.pair .amp{
+  font-family:var(--disp);font-size:26px;color:var(--gold-l);opacity:.8;
+}
+.figure{text-align:center;}
+.figure .ph{
+  position:relative;overflow:hidden;
+  border:1px solid rgba(235,215,155,.35);
+  box-shadow:0 18px 40px -20px rgba(0,0,0,.7);
+}
+.figure .ph::after{
+  content:"";position:absolute;inset:6px;border:1px solid rgba(235,215,155,.22);
+  pointer-events:none;
+}
+.figure img{
+  width:100%;height:250px;object-fit:cover;object-position:center 22%;
+  filter:saturate(.94) contrast(1.02);
+}
+.figure .role{
+  margin-top:14px;font-size:10px;letter-spacing:.42em;text-indent:.42em;
+  color:rgba(243,231,201,.6);font-family:var(--num);
+}
+.figure .nm{
+  font-family:var(--disp);font-size:23px;letter-spacing:.24em;text-indent:.24em;
+  color:#F8EDCE;margin-top:7px;
+}
+.figure .say{
+  margin-top:9px;font-size:12px;line-height:1.9;letter-spacing:.06em;
+  color:rgba(243,231,201,.62);
+}
+
+.band{margin:46px -24px 0;position:relative;}
+.band img{width:100%;height:auto;display:block;}
+.band::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(60,10,14,.35),transparent 30%,transparent 62%,rgba(24,4,7,.78));
+}
+.band figcaption{
+  position:absolute;left:0;right:0;bottom:22px;z-index:2;text-align:center;
+  font-size:13px;letter-spacing:.34em;text-indent:.34em;color:rgba(248,237,206,.9);
+}
+
+/* ============================================================
+   三、照片故事
+   ============================================================ */
+.gblock{margin-top:56px;}
+.gblock:first-of-type{margin-top:34px;}
+.ghead{text-align:center;margin-bottom:22px;}
+.ghead .zh{
+  font-family:var(--disp);font-size:20px;letter-spacing:.4em;text-indent:.4em;
+  color:var(--red);
+}
+.ghead .en{
+  font-family:var(--num);font-size:9px;letter-spacing:.4em;text-indent:.4em;
+  color:var(--ink-2);opacity:.75;margin-top:7px;
+}
+.big-ph{
+  position:relative;overflow:hidden;
+  border:1px solid rgba(140,26,33,.16);
+  box-shadow:0 24px 50px -28px rgba(60,30,10,.5);
+  background:#000;
+}
+.big-ph img{width:100%;height:auto;transform:translate3d(0,0,0) scale(1.08);will-change:transform;}
+.big-ph .cap{
+  position:absolute;left:0;right:0;bottom:0;padding:26px 16px 14px;
+  font-size:11px;letter-spacing:.22em;color:rgba(255,255,255,.9);
+  background:linear-gradient(transparent,rgba(20,6,3,.62));
+  text-indent:.22em;
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px;}
+.grid2 .ph{overflow:hidden;border:1px solid rgba(140,26,33,.14);background:#000;}
+.grid2 img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4;opacity:0;transform:scale(1.06);
+  transition:opacity 1s ease,transform 1.2s cubic-bezier(.2,.8,.2,1);}
+.grid2.in img{opacity:1;transform:scale(1);}
+.grid2.in img:nth-child(2){transition-delay:.12s;}
+
+/* ============================================================
+   四、誓约
+   ============================================================ */
+.quote{
+  text-align:center;padding:clamp(80px,14vh,130px) 22px;
+  background:
+    radial-gradient(circle at 50% 40%,rgba(180,52,60,.55),transparent 60%),
+    linear-gradient(180deg,#4A090D,#2B0508 60%,#450A0E);
+}
+.quote .q-mark{
+  font-family:var(--disp);font-size:52px;line-height:1;color:rgba(235,215,155,.35);
+  margin-bottom:6px;
+}
+.quote .q1{
+  font-family:var(--disp);
+  font-size:clamp(25px,7.6vw,36px);
+  letter-spacing:.16em;text-indent:.16em;line-height:1.85;
+  color:#FBEFCB;
+  text-shadow:0 0 30px rgba(235,215,155,.3);
+}
+.quote .q1 .g{
+  background:linear-gradient(100deg,#F6E4AE,#FFF8E2 42%,#D9B45C 62%,#FBEFCB);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.quote .by{
+  margin-top:30px;font-size:11px;letter-spacing:.3em;text-indent:.3em;
+  color:rgba(243,231,201,.55);
+}
+
+/* ============================================================
+   五、倒计时
+   ============================================================ */
+.count{
+  display:flex;justify-content:center;gap:clamp(10px,3vw,22px);margin-top:36px;
+}
+.count .cell{
+  min-width:64px;padding:14px 6px 11px;
+  border:1px solid rgba(140,26,33,.2);
+  background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.25));
+  position:relative;
+}
+.count .cell::before{
+  content:"";position:absolute;inset:4px;border:1px solid rgba(140,26,33,.09);
+}
+.count b{
+  display:block;font-family:var(--num);font-weight:400;
+  font-size:clamp(25px,7.6vw,32px);color:var(--red);line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.count span{
+  display:block;margin-top:9px;font-size:10px;letter-spacing:.3em;text-indent:.3em;
+  color:var(--ink-2);
+}
+.datecard{
+  margin:38px auto 0;max-width:380px;text-align:center;
+  padding:22px 18px;border-top:1px solid rgba(140,26,33,.22);
+  border-bottom:1px solid rgba(140,26,33,.22);
+}
+.datecard .d{
+  font-family:var(--num);font-size:clamp(26px,8vw,34px);letter-spacing:.1em;
+  color:var(--red);line-height:1.2;
+}
+.datecard .l{
+  margin-top:12px;font-size:12.5px;letter-spacing:.24em;color:var(--ink-2);text-indent:.24em;
+}
+
+/* ============================================================
+   六、婚宴信息
+   ============================================================ */
+.info-list{margin-top:34px;}
+.info-row{
+  display:flex;align-items:baseline;gap:16px;
+  padding:17px 4px;border-bottom:1px dashed rgba(235,215,155,.22);
+}
+.info-row:first-child{border-top:1px dashed rgba(235,215,155,.22);}
+.info-row .k{
+  flex:0 0 62px;font-size:11.5px;letter-spacing:.28em;
+  color:rgba(243,231,201,.55);
+}
+.info-row .v{
+  flex:1;font-size:15.5px;letter-spacing:.08em;line-height:1.75;color:#F8EDCE;
+}
+.info-row .v small{
+  display:block;font-size:11.5px;letter-spacing:.05em;
+  color:rgba(243,231,201,.5);margin-top:4px;
+}
+.btns{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;justify-content:center;}
+.btn{
+  flex:1 1 40%;min-width:132px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 18px;border:1px solid rgba(235,215,155,.45);
+  color:#F8EDCE;font-size:13px;letter-spacing:.22em;text-indent:.22em;
+  text-decoration:none;background:rgba(235,215,155,.06);
+  transition:background .3s ease,border-color .3s ease;
+}
+.btn:active{background:rgba(235,215,155,.16);}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.3;}
+.btn[hidden]{display:none;}
+
+/* ============================================================
+   七、结尾
+   ============================================================ */
+.ending{
+  text-align:center;padding:clamp(130px,24vh,210px) 24px calc(96px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,#40080C,#1E0407);
+  position:relative;overflow:hidden;
+}
+.ending::before{
+  content:"";position:absolute;inset:0;
+  background:url('https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/end.jpg') center 24%/cover no-repeat;
+  opacity:.34;filter:saturate(.9);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 20%);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 20%);
+}
+.ending::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(46,7,10,.58) 0%,rgba(26,4,7,.84) 52%,rgba(12,2,4,.95) 100%);
+}
+.ending .wrap2{position:relative;z-index:2;}
+.ending .thanks{text-shadow:0 2px 20px rgba(0,0,0,.65);}
+.ending .sub{text-shadow:0 1px 12px rgba(0,0,0,.6);}
+.ending .seal2{
+  width:84px;height:84px;margin:0 auto 30px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(235,215,155,.7);transform:rotate(4deg);
+}
+.ending .seal2 span{font-family:'Kai','STKaiti','Kaiti SC','KaiTi',serif;font-size:48px;color:#F6E9C4;}
+.ending .thanks{
+  font-family:var(--disp);font-size:clamp(21px,6vw,27px);
+  letter-spacing:.24em;text-indent:.24em;color:#F8EDCE;line-height:1.9;
+}
+.ending .sub{
+  margin-top:18px;font-size:12px;letter-spacing:.22em;text-indent:.22em;
+  color:rgba(243,231,201,.5);line-height:2.1;
+}
+.bgm-credit{
+  margin-top:20px;font-size:11px;letter-spacing:.24em;text-indent:.24em;
+  color:rgba(235,215,155,.55);
+}
+.ending .nm2{
+  margin-top:34px;font-family:var(--num);font-size:12px;letter-spacing:.4em;text-indent:.4em;
+  color:rgba(235,215,155,.65);
+}
+
+/* ============================================================
+   音乐按钮 / 飘落花瓣
+   ============================================================ */
+#music{
+  position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));
+  z-index:70;width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(235,215,155,.55);
+  background:rgba(26,4,7,.78);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;
+  color:#F6E9C4;transition:opacity .5s ease,transform .5s ease;
+  opacity:0;transform:scale(.8);
+}
+body.opened #music{display:flex;opacity:1;transform:none;}
+#music svg{width:19px;height:19px;fill:currentColor;}
+#music .note{animation:spin 4.2s linear infinite;transform-origin:50% 50%;}
+#music.paused .note{animation-play-state:paused;opacity:.55;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+#petals{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:0;transition:opacity 1.2s ease;}
+body.opened #petals{opacity:1;}
+
+/* 顶部细微进度条 */
+#prog{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:80;
+  background:linear-gradient(90deg,#8C1A21,#C8A24A,#EBD79B);
+  opacity:0;transition:opacity .6s ease;
+}
+body.opened #prog{opacity:.75;}
+
+@media (max-width:360px){
+  .figure img{height:210px;}
+  .count .cell{min-width:56px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;transition-duration:.15s!important;}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- ================= 封面 ================= -->
+<div id="cover">
+  <div class="cover-frame">
+    <i class="corner tl"></i><i class="corner tr"></i>
+    <i class="corner bl"></i><i class="corner br"></i>
+  </div>
+  <div class="cover-inner">
+    <p class="cover-eyebrow">WEDDING INVITATION</p>
+    <div class="seal"><span>囍</span></div>
+    <h1 class="cover-names">陈磊<i>&amp;</i>曾淼</h1>
+    <div class="cover-rule"></div>
+    <p class="cover-date">2027.01.31</p>
+    <p class="cover-lunar">农历丙午年 腊月廿四 · 星期日</p>
+  </div>
+  <div class="cover-open" id="openBtn">
+    <div class="ring"><svg viewBox="0 0 24 24"><path d="M12 4v13M6 12l6 6 6-6"/></svg></div>
+    <em>轻触开启</em>
+  </div>
+</div>
+
+<div id="prog"></div>
+<canvas id="petals"></canvas>
+
+<!-- ================= 正文 ================= -->
+<main>
+
+  <!-- 一、邀请函 -->
+  <section class="sec paper">
+    <div class="wrap">
+      <p class="eyebrow rv">INVITATION</p>
+      <h2 class="title rv">邀 请 函</h2>
+      <div class="rule rv"><span></span><i>❖</i><span></span></div>
+
+      <div class="invite rv">
+        <p>谨定于</p>
+        <p class="big">二〇二七年一月三十一日</p>
+        <p class="dim">农历丙午年 · 腊月廿四 · 星期日</p>
+        <p>为 陈磊 先生 与 曾淼 女士</p>
+        <p>举行婚宴</p>
+        <p style="font-size:.86em;letter-spacing:.1em">重庆市开州区长沙镇　红月亮酒店</p>
+        <p class="qi">敬备喜筵　恭候光临</p>
+      </div>
+
+      <div class="signwrap rv">
+        <div class="sign">
+          <span class="zh">新　郎　新　娘</span>
+          <b>陈磊 · 曾淼</b>
+          <span class="zh">敬　邀</span>
+        </div>
+        <span class="stamp">囍</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 二、新人 -->
+  <section class="sec dark">
+    <div class="wrap">
+      <p class="eyebrow rv">THE BRIDE &amp; GROOM</p>
+      <h2 class="title rv">新 人</h2>
+      <div class="rule rv"><span></span><i>❖</i><span></span></div>
+
+      <div class="pair">
+        <div class="figure rv">
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/groom.jpg" alt="新郎 陈磊" loading="lazy"></div>
+          <p class="role">GROOM</p>
+          <p class="nm">陈 磊</p>
+          <p class="say">往后余生<br>风雪是你，平淡也是你</p>
+        </div>
+        <div class="amp rv">&amp;</div>
+        <div class="figure rv">
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/bride.jpg" alt="新娘 曾淼" loading="lazy"></div>
+          <p class="role">BRIDE</p>
+          <p class="nm">曾 淼</p>
+          <p class="say">朝朝暮暮<br>愿与你共赴余生</p>
+        </div>
+      </div>
+
+      <figure class="band rv">
+        <img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/dark1.jpg" alt="婚纱照" loading="lazy">
+        <figcaption>此后你是我，我亦是你</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 三、照片故事 -->
+  <section class="sec paper">
+    <div class="wrap">
+      <p class="eyebrow rv">OUR STORY</p>
+      <h2 class="title rv">我 们</h2>
+      <div class="rule rv"><span></span><i>❖</i><span></span></div>
+
+      <div class="gblock rv">
+        <div class="ghead">
+          <p class="zh">白 纱</p>
+          <p class="en">WHITE VOWS</p>
+        </div>
+        <div class="big-ph">
+          <img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/white1.jpg" alt="婚纱照" loading="lazy" data-parallax="0.06">
+          <div class="cap">愿此后岁岁年年，皆如今日明朗</div>
+        </div>
+        <div class="grid2">
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/white2.jpg" alt="婚纱照" loading="lazy"></div>
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/white3.jpg" alt="婚纱照" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="gblock rv">
+        <div class="ghead">
+          <p class="zh">红 妆</p>
+          <p class="en">CHINESE RED</p>
+        </div>
+        <div class="big-ph">
+          <img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/red1.jpg" alt="中式礼服" loading="lazy" data-parallax="0.06">
+          <div class="cap">凤冠霞帔，共许白头</div>
+        </div>
+        <div class="grid2">
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/pen.jpg" alt="中式礼服" loading="lazy"></div>
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/red2.jpg" alt="中式礼服" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="gblock rv">
+        <div class="ghead">
+          <p class="zh">花 间</p>
+          <p class="en">IN BLOOM</p>
+        </div>
+        <div class="big-ph">
+          <img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/garden1.jpg" alt="户外婚纱照" loading="lazy" data-parallax="0.06">
+          <div class="cap">你是我在人海里，最想走完的那条路</div>
+        </div>
+        <div class="grid2">
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/garden2.jpg" alt="户外婚纱照" loading="lazy"></div>
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/garden3.jpg" alt="户外婚纱照" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="gblock rv" style="margin-top:9px">
+        <div class="grid2 in">
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/garden4.jpg" alt="户外婚纱照" loading="lazy" style="opacity:1;transform:none"></div>
+          <div class="ph"><img src="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/dark2.jpg" alt="婚纱照" loading="lazy" style="opacity:1;transform:none"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 四、誓约 -->
+  <section class="quote">
+    <div class="wrap">
+      <p class="q-mark rv">“</p>
+      <h2 class="q1 rv"><span class="g">你的路　我的途</span><br>从此再也不分己与彼</h2>
+      <p class="by rv">陈磊　·　曾淼　共誓</p>
+    </div>
+  </section>
+
+  <!-- 五、倒计时 -->
+  <section class="sec paper">
+    <div class="wrap">
+      <p class="eyebrow rv">COUNT DOWN</p>
+      <h2 class="title rv">良 辰 将 至</h2>
+      <div class="rule rv"><span></span><i>❖</i><span></span></div>
+
+      <div class="count rv" id="count">
+        <div class="cell"><b id="cd-d">—</b><span>天</span></div>
+        <div class="cell"><b id="cd-h">—</b><span>时</span></div>
+        <div class="cell"><b id="cd-m">—</b><span>分</span></div>
+        <div class="cell"><b id="cd-s">—</b><span>秒</span></div>
+      </div>
+
+      <div class="datecard rv">
+        <p class="d">2027 · 01 · 31</p>
+        <p class="l">星期日 · 农历丙午年腊月廿四</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 六、婚宴信息 -->
+  <section class="sec dark">
+    <div class="wrap">
+      <p class="eyebrow rv">WEDDING BANQUET</p>
+      <h2 class="title rv">喜 宴</h2>
+      <div class="rule rv"><span></span><i>❖</i><span></span></div>
+
+      <!-- ======== ↓↓↓ 待补充信息：把〔〕里的内容换成真实信息 ↓↓↓ ======== -->
+      <div class="info-list rv">
+        <div class="info-row">
+          <span class="k">日 期</span>
+          <span class="v">2027年1月31日<small>星期日 · 农历腊月廿四</small></span>
+        </div>
+        <div class="info-row">
+          <span class="k">时 间</span>
+          <span class="v" id="timeText">午宴　12:00 开席<small>11:30 起迎宾</small></span>
+        </div>
+        <div class="info-row">
+          <span class="k">地 点</span>
+          <span class="v" id="venueText">重庆市开州区长沙镇 红月亮酒店<small>点下方「导航前往」可直接地图导航</small></span>
+        </div>
+        <div class="info-row">
+          <span class="k">邀 请</span>
+          <span class="v">诚邀您与家人光临<small>同席共饮，喜宴相候</small></span>
+        </div>
+      </div>
+      <!-- ======== ↑↑↑ 待补充信息 ↑↑↑ ======== -->
+
+      <div class="btns rv">
+        <a class="btn" id="mapBtn" href="#" hidden>
+          <svg viewBox="0 0 24 24"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+          导航前往
+        </a>
+        <a class="btn" id="telBtn" href="#" hidden>
+          <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 4 5.1 1 1 0 0 1 5 4z"/></svg>
+          联系新人
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 七、结尾 -->
+  <section class="ending">
+    <div class="wrap2">
+      <h2 class="thanks rv">期待与你　同席共饮</h2>
+      <p class="sub rv">愿以岁月为笺，以陪伴为墨<br>与你共写此后余生</p>
+      <p class="nm2 rv">CHEN LEI &amp; ZENG MIAO</p>
+      <p class="bgm-credit rv" id="bgmCredit" hidden>♪ 陈奕迅《每一个明天》</p>
+    </div>
+  </section>
+
+</main>
+
+<button id="music" aria-label="背景音乐">
+  <svg viewBox="0 0 24 24"><path class="note" d="M9 18.5a2.5 2.5 0 1 1-2.5-2.5c.5 0 1 .1 1.5.2V5l10-2v11.5a2.5 2.5 0 1 1-2.5-2.5c.5 0 1 .1 1.5.2V6.4L10 7.9v10.6z"/></svg>
+</button>
+
+<script>
+/* ============================================================
+   配置区：所有需要你改的东西都在这里
+   ============================================================ */
+var CONFIG = {
+  // 婚礼当天的时间（用于倒计时），格式：年-月-日T时:分:秒+08:00
+  weddingAt: '2027-01-31T12:00:00+08:00',   // 婚宴开席时间
+
+  // 背景音乐：把陈奕迅的 mp3 放到 assets/music/ 里，文件名改成下面这个
+  // 建议：稳稳的幸福 / 陪你度过漫长岁月 / 天下无双
+  bgm: [
+    { name: '每一个明天', src: 'https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/music/every-tomorrow.mp3' },  // ← 陈奕迅《每一个明天》
+    { name: '喜宴氛围曲', src: 'https://cdn.jsdelivr.net/gh/shine-fpga/wedding/assets/music/bgm.mp3' }               // ← 内置兜底音乐
+  ],
+
+  // 地图：填了地址后「导航前往」按钮自动出现。默认调用高德地图搜索
+  mapKeyword: '重庆市开州区长沙镇红月亮酒店',
+
+  // 联系电话：填了就显示「联系新人」按钮（多个用逗号隔开）
+  phones: []        // 例：['13800000000']
+};
+/* ========================================================== */
+
+(function () {
+  'use strict';
+
+  var body = document.body;
+
+  /* ---------- 1. 封面开启 ---------- */
+  var openBtn = document.getElementById('openBtn');
+  var opened = false;
+
+  function openInvite() {
+    if (opened) return;
+    opened = true;
+    body.classList.remove('locked');
+    body.classList.add('opened');
+    window.scrollTo(0, 0);
+    playMusic();
+    setTimeout(initPetals, 400);
+  }
+  openBtn.addEventListener('click', openInvite);
+  document.getElementById('cover').addEventListener('click', openInvite);
+
+  /* ---------- 2. 背景音乐 ---------- */
+  var audio = new Audio();
+  window.__wedAudio = audio;   // 调试用
+  audio.loop = true;
+  audio.volume = 0;
+  audio.preload = 'auto';
+  var trackIndex = 0;
+  var musicBtn = document.getElementById('music');
+  var playing = false;
+
+  function loadTrack(i) {
+    trackIndex = i;
+    var t = CONFIG.bgm[i];
+    if (!t) return false;
+    audio.src = t.src;
+    audio.load();
+    return true;
+  }
+  audio.addEventListener('error', function () {
+    // 当前这首不存在就换下一首
+    if (trackIndex + 1 < CONFIG.bgm.length) {
+      loadTrack(trackIndex + 1);
+      if (playing) startPlay();
+    }
+  });
+
+  function startPlay() {
+    audio.play().then(function () {
+      playing = true;
+      musicBtn.classList.remove('paused');
+      // 只有当真正在播《每一个明天》时才显示歌名署名
+      var cred = document.getElementById('bgmCredit');
+      if (cred) {
+        var nowSrc = (CONFIG.bgm[trackIndex] || {}).src || '';
+        cred.hidden = nowSrc.indexOf('every-tomorrow') === -1;
+      }
+      // 音量淡入
+      var v = 0;
+      var timer = setInterval(function () {
+        v = Math.min(0.85, v + 0.06);
+        audio.volume = v;
+        if (v >= 0.85) clearInterval(timer);
+      }, 60);
+    }).catch(function () {
+      playing = false;
+      musicBtn.classList.add('paused');
+    });
+  }
+
+  function playMusic() {
+    loadTrack(0);
+    setTimeout(startPlay, 260);
+  }
+
+  musicBtn.addEventListener('click', function () {
+    if (!audio.src) { loadTrack(0); }
+    if (playing) {
+      audio.pause();
+      playing = false;
+      musicBtn.classList.add('paused');
+    } else {
+      startPlay();
+    }
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden && playing) {
+      audio.pause();
+    } else if (!document.hidden && playing === false && opened && audio.currentTime > 0) {
+      audio.play().catch(function () {});
+    }
+  });
+
+  /* ---------- 3. 滚动入场 ---------- */
+  var revealEls = [].slice.call(document.querySelectorAll('.rv'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  var g2 = [].slice.call(document.querySelectorAll('.grid2'));
+  if ('IntersectionObserver' in window) {
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io2.unobserve(en.target); }
+      });
+    }, { threshold: 0.2 });
+    g2.forEach(function (el) { io2.observe(el); });
+  } else {
+    g2.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- 4. 视差 + 顶部进度 ---------- */
+  var prog = document.getElementById('prog');
+  var pxEls = [].slice.call(document.querySelectorAll('[data-parallax]'));
+  var ticking = false;
+
+  function onScroll() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = Math.min(100, (y / (h || 1)) * 100) + '%';
+
+    pxEls.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
+      var raw = (r.top + r.height / 2 - window.innerHeight / 2) * parseFloat(el.dataset.parallax || 0);
+      // 限幅，避免位移过大把图片边缘拉出黑边
+      var maxOff = r.height * 0.045;
+      var off = Math.max(-maxOff, Math.min(maxOff, raw));
+      el.style.transform = 'translate3d(0,' + off.toFixed(1) + 'px,0) scale(1.1)';
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  /* ---------- 5. 倒计时 ---------- */
+  var target = new Date(CONFIG.weddingAt).getTime();
+  var elD = document.getElementById('cd-d'),
+      elH = document.getElementById('cd-h'),
+      elM = document.getElementById('cd-m'),
+      elS = document.getElementById('cd-s');
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function tick() {
+    var diff = target - Date.now();
+    if (diff <= 0) {
+      var box = document.getElementById('count');
+      if (box) box.innerHTML = '<div class="cell" style="min-width:auto;padding:16px 22px"><b style="font-size:20px;letter-spacing:.2em">今日大喜</b><span>良辰已至</span></div>';
+      return;
+    }
+    var s = Math.floor(diff / 1000);
+    elD.textContent = pad(Math.floor(s / 86400));
+    elH.textContent = pad(Math.floor(s % 86400 / 3600));
+    elM.textContent = pad(Math.floor(s % 3600 / 60));
+    elS.textContent = pad(s % 60);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- 6. 地图 / 电话 ---------- */
+  var mapBtn = document.getElementById('mapBtn');
+  if (CONFIG.mapKeyword) {
+    mapBtn.href = 'https://uri.amap.com/search?keyword=' + encodeURIComponent(CONFIG.mapKeyword);
+    mapBtn.hidden = false;
+  }
+  var telBtn = document.getElementById('telBtn');
+  if (CONFIG.phones && CONFIG.phones.length) {
+    telBtn.href = 'tel:' + CONFIG.phones[0];
+    telBtn.hidden = false;
+  }
+
+  /* ---------- 7. 飘落花瓣 ---------- */
+  function initPetals() {
+    var cv = document.getElementById('petals');
+    if (!cv || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ctx = cv.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W, H;
+
+    function resize() {
+      W = cv.width = Math.floor(window.innerWidth * dpr);
+      H = cv.height = Math.floor(window.innerHeight * dpr);
+      cv.style.width = window.innerWidth + 'px';
+      cv.style.height = window.innerHeight + 'px';
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var colors = ['rgba(200,162,74,', 'rgba(235,215,155,', 'rgba(200,162,74,'];
+    var petals = [];
+    var count = window.innerWidth < 420 ? 12 : 18;
+
+    for (var i = 0; i < count; i++) {
+      petals.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: (3 + Math.random() * 4.5) * dpr,
+        vy: (0.22 + Math.random() * 0.4) * dpr,
+        vx: (-0.16 + Math.random() * 0.32) * dpr,
+        a: Math.random() * Math.PI * 2,
+        va: (-0.012 + Math.random() * 0.024),
+        c: colors[(Math.random() * colors.length) | 0],
+        o: 0.1 + Math.random() * 0.22
+      });
+    }
+
+    function drawPetal(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.a);
+      ctx.beginPath();
+      ctx.moveTo(0, -p.r);
+      ctx.bezierCurveTo(p.r * 0.9, -p.r * 0.6, p.r * 0.55, p.r * 0.75, 0, p.r);
+      ctx.bezierCurveTo(-p.r * 0.55, p.r * 0.75, -p.r * 0.9, -p.r * 0.6, 0, -p.r);
+      ctx.fillStyle = p.c + p.o + ')';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    var raf;
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < petals.length; i++) {
+        var p = petals[i];
+        p.x += p.vx + Math.sin(p.y * 0.004) * 0.22 * dpr;
+        p.y += p.vy;
+        p.a += p.va;
+        if (p.y - p.r > H) { p.y = -p.r * 2; p.x = Math.random() * W; }
+        if (p.x < -40) p.x = W + 20;
+        if (p.x > W + 40) p.x = -20;
+        drawPetal(p);
+      }
+      raf = requestAnimationFrame(loop);
+    }
+    loop();
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else loop();
+    });
+  }
+})();
+</script>
+</body>
+</html>
