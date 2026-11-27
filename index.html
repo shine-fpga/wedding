@@ -9,7 +9,13 @@
 <meta name="description" content="2027年1月31日（农历腊月廿四），陈磊与曾淼敬备喜筵，恭候光临。你的路，我的途，从此再也不分己与彼。">
 <meta property="og:title" content="陈磊 &amp; 曾淼 · 婚礼邀请函">
 <meta property="og:description" content="2027.01.31 · 你的路，我的途，从此再也不分己与彼">
-<meta property="og:image" content="assets/img/cover.jpg">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/cover.jpg">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="1024">
+<meta itemprop="image" content="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/shine-fpga/wedding@main/assets/img/cover.jpg">
 <style>
 /* ============================================================
    基础变量：想改配色只需改这几行
@@ -66,14 +72,14 @@ h1,h2,h3{margin:0;font-weight:400;}
   transition:transform 1.15s cubic-bezier(.76,0,.24,1),opacity .9s ease;
   will-change:transform;
 }
-#cover::before{ /* 虚化的婚纱照底 */
-  content:"";position:absolute;inset:-8%;
-  background:url('assets/img/cover.jpg') center 26%/cover no-repeat;
+.cover-bg{ /* 封面照片：用真实 img 标签，微信抓缩略图才认得了 */
+  position:absolute;inset:-8%;width:116%;height:116%;
+  object-fit:cover;object-position:center 26%;
   filter:blur(11px) saturate(1.05) brightness(.92);
-  opacity:.52;
+  opacity:.52;pointer-events:none;
 }
 #cover::after{ /* 红色渐层 + 暗角 */
-  content:"";position:absolute;inset:0;
+  content:"";position:absolute;inset:0;z-index:1;
   background:
     radial-gradient(ellipse at 50% 44%,rgba(60,10,14,.12) 0%,rgba(34,5,8,.55) 55%,rgba(14,2,4,.9) 100%),
     linear-gradient(180deg,rgba(48,8,12,.5) 0%,rgba(146,28,36,.16) 46%,rgba(18,3,5,.86) 100%);
@@ -546,6 +552,7 @@ body.opened #prog{opacity:.75;}
 
 <!-- ================= 封面 ================= -->
 <div id="cover">
+  <img class="cover-bg" src="assets/img/cover.jpg" alt="陈磊 曾淼 婚纱照">
   <div class="cover-frame">
     <i class="corner tl"></i><i class="corner tr"></i>
     <i class="corner bl"></i><i class="corner br"></i>
