@@ -341,21 +341,24 @@ body.opened main{opacity:1;}
 }
 .spread:first-of-type{margin-top:0;}
 
-/* 歌词 */
-.lyric-box{
-  position:relative;height:46vh;max-height:430px;min-height:260px;
-  overflow:hidden;margin:22px auto 0;max-width:480px;
-  -webkit-mask-image:linear-gradient(180deg,transparent,#000 15%,#000 85%,transparent);
-  mask-image:linear-gradient(180deg,transparent,#000 15%,#000 85%,transparent);
+/* 悬浮歌词 */
+.lyric-float{
+  position:fixed;left:0;right:0;z-index:66;
+  bottom:calc(80px + env(safe-area-inset-bottom));
+  display:flex;justify-content:center;
+  pointer-events:none;opacity:0;transform:translateY(8px);
+  transition:opacity .55s ease,transform .55s ease;
 }
-.lyric-inner{transition:transform .6s cubic-bezier(.22,.8,.2,1);will-change:transform;}
-.lyric-line{
-  margin:0;text-align:center;font-size:14.5px;line-height:2.55;letter-spacing:.07em;
-  color:rgba(243,231,201,.3);transition:color .45s ease,font-size .45s ease,text-shadow .45s ease;
-}
-.lyric-line.on{
-  color:#F8EDCE;font-size:16.5px;
-  text-shadow:0 0 22px rgba(235,215,155,.5);
+.lyric-float.show{opacity:1;transform:none;}
+.lyric-float span{
+  max-width:84vw;padding:8px 18px;border-radius:999px;
+  font-size:13.5px;line-height:1.5;letter-spacing:.06em;
+  color:#F8EDCE;text-align:center;
+  background:rgba(26,5,8,.62);
+  border:1px solid rgba(235,215,155,.24);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  text-shadow:0 1px 8px rgba(0,0,0,.65);
+  transition:opacity .22s ease;
 }
 .lyric-credit{
   margin-top:20px;text-align:center;font-size:11px;letter-spacing:.2em;
@@ -620,6 +623,9 @@ body.opened #prog{opacity:.75;}
 <div id="prog"></div>
 <canvas id="petals"></canvas>
 
+<!-- 悬浮歌词 -->
+<div class="lyric-float" id="lyricFloat"><span id="lyricText"></span></div>
+
 <!-- ================= 正文 ================= -->
 <main>
 
@@ -717,22 +723,6 @@ body.opened #prog{opacity:.75;}
       <p class="q-mark rv">“</p>
       <h2 class="q1 rv"><span class="g">你的路　我的途</span><br>从此再也不分己与彼</h2>
       <p class="by rv">陈磊　·　曾淼　共誓</p>
-    </div>
-  </section>
-
-  <!-- 五、歌词（跟着音乐同步） -->
-  <section class="sec dark">
-    <div class="wrap">
-      <p class="eyebrow rv">THE SONG</p>
-      <h2 class="title rv">每 一 个 明 天</h2>
-      <div class="rule rv"><span></span><i>❖</i><span></span></div>
-      <p class="lyric-credit rv">陈奕迅　作词 林振强　作曲 柳重言</p>
-
-      <div class="lyric-box" id="lyricBox">
-        <div class="lyric-inner" id="lyricInner"></div>
-      </div>
-
-      <p class="lyric-credit rv" id="lyricTip">点开封面听歌，歌词会跟着走 ♪</p>
     </div>
   </section>
 
@@ -1125,22 +1115,25 @@ var LYRICS = [{t:10.76,s:"结伴创将来多么的美"},{t:15.23,s:"你的路我
       else loop();
     });
   }
-  /* ---------- 8. 歌词同步 ---------- */
-  var LYRIC_OFFSET = 0;   // 单位秒；正数=歌词提前，负数=歌词延后
-  var lyricBox = document.getElementById('lyricBox');
-  var lyricInner = document.getElementById('lyricInner');
-  var lyricLines = [];
+  /* ---------- 8. 悬浮歌词同步 ---------- */
+  var LYRIC_OFFSET = 0;   // 正数=歌词提前，负数=歌词延后（秒）
+  var lyricFloat = document.getElementById('lyricFloat');
+  var lyricText = document.getElementById('lyricText');
+  var lastLyricIdx = -2;
+  var lyricTimer = null;
 
-  if (lyricInner && typeof LYRICS !== 'undefined') {
-    lyricInner.innerHTML = LYRICS.map(function (l) {
-      return '<p class="lyric-line">' + l.s + '</p>';
-    }).join('');
-    lyricLines = [].slice.call(lyricInner.children);
+  function showFloatLine(txt) {
+    if (!lyricText) return;
+    lyricText.style.opacity = 0;
+    clearTimeout(lyricTimer);
+    lyricTimer = setTimeout(function () {
+      lyricText.textContent = txt;
+      lyricText.style.opacity = 1;
+    }, 170);
   }
 
-  var lastLyricIdx = -2;
   function syncLyric(cur) {
-    if (!lyricLines.length) return;
+    if (!lyricFloat || typeof LYRICS === 'undefined') return;
     var t = cur + LYRIC_OFFSET;
     var idx = -1;
     for (var i = 0; i < LYRICS.length; i++) {
@@ -1148,22 +1141,13 @@ var LYRICS = [{t:10.76,s:"结伴创将来多么的美"},{t:15.23,s:"你的路我
     }
     if (idx === lastLyricIdx) return;
     lastLyricIdx = idx;
-
-    for (var j = 0; j < lyricLines.length; j++) {
-      if (j === idx) lyricLines[j].classList.add('on');
-      else lyricLines[j].classList.remove('on');
-    }
-    if (idx >= 0 && lyricBox) {
-      var el = lyricLines[idx];
-      var boxH = lyricBox.clientHeight;
-      var off = el.offsetTop - boxH / 2 + el.offsetHeight / 2;
-      lyricInner.style.transform = 'translateY(' + (-off).toFixed(1) + 'px)';
-      var tip = document.getElementById('lyricTip');
-      if (tip) tip.textContent = '♪ 正在播放 · 陈奕迅《每一个明天》';
-    }
+    if (idx >= 0) showFloatLine(LYRICS[idx].s);
   }
+
   audio.addEventListener('timeupdate', function () { syncLyric(audio.currentTime); });
   audio.addEventListener('seeking', function () { lastLyricIdx = -2; syncLyric(audio.currentTime); });
+  audio.addEventListener('play', function () { if (lyricFloat) lyricFloat.classList.add('show'); });
+  audio.addEventListener('pause', function () { if (lyricFloat) lyricFloat.classList.remove('show'); });
 })();
 </script>
 </body>
