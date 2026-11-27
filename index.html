@@ -829,6 +829,7 @@ var CONFIG = {
   var trackIndex = 0;
   var musicBtn = document.getElementById('music');
   var playing = false;
+  var userPaused = false;   // 用户手动暂停过就不自动续播
 
   function loadTrack(i) {
     trackIndex = i;
@@ -839,16 +840,17 @@ var CONFIG = {
     return true;
   }
   audio.addEventListener('error', function () {
-    // 当前这首不存在就换下一首
+    // 当前这首不存在（还没放 mp3）→ 自动换下一首并继续播
     if (trackIndex + 1 < CONFIG.bgm.length) {
       loadTrack(trackIndex + 1);
-      if (playing) startPlay();
+      if (!userPaused) setTimeout(startPlay, 180);
     }
   });
 
   function startPlay() {
     audio.play().then(function () {
       playing = true;
+      userPaused = false;
       musicBtn.classList.remove('paused');
       // 只有当真正在播《每一个明天》时才显示歌名署名
       var cred = document.getElementById('bgmCredit');
@@ -879,8 +881,10 @@ var CONFIG = {
     if (playing) {
       audio.pause();
       playing = false;
+      userPaused = true;
       musicBtn.classList.add('paused');
     } else {
+      userPaused = false;
       startPlay();
     }
   });
